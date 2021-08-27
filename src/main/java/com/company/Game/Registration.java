@@ -83,6 +83,7 @@ public class Registration {
                 button2.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        frame.dispose();
                         String userName = userNameText.getText();
                         String password = passwordText.getText();
 
@@ -115,6 +116,7 @@ public class Registration {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     CowsAndBulls.main();
+                                    frame2.dispose();
 
                                 }
                             });

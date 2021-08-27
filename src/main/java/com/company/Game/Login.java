@@ -81,6 +81,12 @@ public class Login implements ActionListener {
         button = new JButton("Login");
         button.setBounds(150, 280, 80, 25);
         button.addActionListener(new Login());
+        button.addActionListener (new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+            }
+        });
         panel.add(button);
 
 
@@ -89,7 +95,9 @@ public class Login implements ActionListener {
         button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 Registration.main();
+                frame.dispose();
             }
         });
         panel.add(button2);
@@ -127,6 +135,7 @@ public class Login implements ActionListener {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     CowsAndBulls.main();
+                    frame2.dispose();
 
                 }
             });
