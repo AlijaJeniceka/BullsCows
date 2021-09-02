@@ -27,6 +27,7 @@ public class Login implements ActionListener {
     public static boolean loginController(){
         String username = userText.getText();
         String password = String.valueOf(passwordText.getPassword());
+
         System.out.println(username +  " " + password);
         try {
 
@@ -35,7 +36,7 @@ public class Login implements ActionListener {
 
             rs = ps.executeQuery();
 
-            String passwordCheck = "";
+            String passwordCheck = "password";
             while (rs.next()) {
                 passwordCheck = rs.getString("password");
 
@@ -69,6 +70,7 @@ public class Login implements ActionListener {
         userText.setBounds(240, 200, 165, 25);
         panel.add(userText);
 
+
         passwordLabel = new JLabel("Password");
         passwordLabel.setBounds(150, 230, 80, 25);
         panel.add(passwordLabel);
@@ -76,6 +78,7 @@ public class Login implements ActionListener {
         passwordText = new JPasswordField();
         passwordText.setBounds(240, 230, 165, 25);
         panel.add(passwordText);
+
 
         button = new JButton("Login");
         button.setBounds(150, 280, 80, 25);
@@ -156,7 +159,7 @@ public class Login implements ActionListener {
             frame2.setVisible(true);
 
         }else {
-            JOptionPane.showMessageDialog(null, "Try again, there is an error", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Try again, there is an error. Please enter your username and password.", "Error", JOptionPane.ERROR_MESSAGE);
             main();
         }
     }

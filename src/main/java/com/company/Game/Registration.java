@@ -1,8 +1,6 @@
 package com.company.Game;
 
-import com.company.dbhelper.DbConnector;
 import com.company.dbhelper.User;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -44,6 +42,7 @@ public class Registration {
         userNameText.setBounds(240, 200, 165, 25);
         panel.add(userNameText);
 
+
         passwordLabel = new JLabel("Password");
         passwordLabel.setBounds(100, 240, 80, 25);
         panel.add(passwordLabel);
@@ -51,6 +50,7 @@ public class Registration {
         passwordText = new JPasswordField();
         passwordText.setBounds(240, 240, 165, 25);
         panel.add(passwordText);
+
 
         button = new JButton("Exit");
         button.setBounds(100, 320, 100, 25);
@@ -67,6 +67,9 @@ public class Registration {
                 button2.setBounds(240, 320, 100, 25);
                 panel.add(button2);
                 frame.setVisible(true);
+
+
+
                 button2.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -74,6 +77,8 @@ public class Registration {
                         String userName = userNameText.getText();
                         String password = passwordText.getText();
 
+                        if(userNameText.getText().length() != 0 && passwordText.getText().length() != 0 )
+                        {
                         try {
                             Connection connection = DriverManager.getConnection("jdbc:mysql://db4free.net:3306/game_bulls_cows", User.USERNAME.getValue(), User.PASSWORD.getValue());
                             String query = "INSERT INTO CowsAndBulls(username, password)" + "VALUES('" + userName + "', '" + password + "')";
@@ -129,10 +134,14 @@ public class Registration {
 
 
                         } catch (Exception exception) {
-                            JOptionPane.showMessageDialog(null, "Username already exists", "Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Please enter another username, this already exist.", "Error", JOptionPane.ERROR_MESSAGE);
                             main();
 
 
+                        }}
+                        else{
+                            JOptionPane.showMessageDialog(null, "Please enter username and password.", "Error", JOptionPane.ERROR_MESSAGE);
+                            main();
                         }
 
 
