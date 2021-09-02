@@ -1,5 +1,7 @@
 package com.company;
 
+
+import com.company.Game.HardGame;
 import com.company.Game.Login;
 
 public class Main {
@@ -7,5 +9,7 @@ public class Main {
       Login.main();
      //   Registration.main();
        // CowsAndBulls.main();
+       // HardGame.main();
+      //  BullsCows.main();
     }
 }

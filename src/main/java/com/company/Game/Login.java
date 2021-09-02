@@ -2,7 +2,6 @@ package com.company.Game;
 
 import com.company.dbhelper.DbConnector;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,19 +18,19 @@ public class Login implements ActionListener {
     private static JLabel titleLabel;
     private static JPasswordField passwordText;
     private static JButton button;
-    private static JButton button2, button3, button4;
+    private static JButton button2, button3, button4, button5;
     private static JLabel success;
     private static Font titleFont = new Font("Times New Roman", Font.BOLD, 30);
     private static Font normalTitle = new Font("Times New Roman", Font.PLAIN, 25);
     private static PreparedStatement ps;
     private static ResultSet rs;
     public static boolean loginController(){
-        String  username = userText.getText();
+        String username = userText.getText();
         String password = String.valueOf(passwordText.getPassword());
         System.out.println(username +  " " + password);
         try {
 
-            ps = DbConnector.getConnection().prepareStatement( "SELECT * FROM users " +
+            ps = DbConnector.getConnection().prepareStatement( "SELECT * FROM CowsAndBulls " +
                     "WHERE username='" + username + "'");
 
             rs = ps.executeQuery();
@@ -101,20 +100,10 @@ public class Login implements ActionListener {
             }
         });
         panel.add(button2);
-
         frame.setVisible(true);
-
     }
-
     @Override
     public void  actionPerformed(ActionEvent e) {
-     //   String username = userText.getText();
-     //   String password = passwordText.getText();
-      //  System.out.println(username + ", " + password);
-//
-        // Here we need to think how system could check entered login data (username and password)
-        // and login user in the game.
-
 
         if(loginController()) {
             JFrame frame2 = new JFrame();
@@ -140,8 +129,19 @@ public class Login implements ActionListener {
                 }
             });
 
-
             panel2.add(button3);
+            button5 = new JButton("Start new hard game");
+            button5.setBounds(300, 200, 200, 25);
+            button5.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    HardGame.main();
+                    frame2.dispose();
+
+                }
+            });
+
+            panel2.add(button5);
 
             button4 = new JButton("Exit");
             button4.setBounds(50, 250, 100, 25);
@@ -157,6 +157,7 @@ public class Login implements ActionListener {
 
         }else {
             JOptionPane.showMessageDialog(null, "Try again, there is an error", "Error", JOptionPane.ERROR_MESSAGE);
+            main();
         }
     }
 }

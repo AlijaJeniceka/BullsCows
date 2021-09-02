@@ -12,7 +12,8 @@ public class DbConnector {
         Connection connection = null;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bulls_cows", "root", "Abdurawidovna.91");
+            connection = DriverManager.getConnection("jdbc:mysql://db4free.net:3306/game_bulls_cows", User.USERNAME.getValue(),
+                    User.PASSWORD.getValue());
            // System.out.println("Database connected successfully.");
         } catch (SQLException var2) {
          //   System.out.println("Unable to connect to database.");

@@ -7,6 +7,7 @@ import javax.swing.text.StyledDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Comparator;
 import java.util.Random;
 
 public class CowsAndBulls {

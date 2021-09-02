@@ -1,30 +1,27 @@
 package com.company.Game;
 
-import com.company.Game.CowsAndBulls;
+import com.company.dbhelper.DbConnector;
+import com.company.dbhelper.User;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Registration {
-    private static JLabel userNameLabel, repeatPsLabel, accountLabel, failLabel;
+    private static JLabel userNameLabel, accountLabel, failLabel;
     private static JTextField userNameText;
     private static JLabel passwordLabel;
-    private static JPasswordField passwordText, repeatPsText;
+    private static JPasswordField passwordText;
     private static JButton button;
-    private static JButton button2, button3, button4, button5;
+    private static JButton button2, button3, button4;
     private static JLabel success;
     private static Font titleFont = new Font("Times New Roman", Font.BOLD, 30);
     private static Font normalTitle = new Font("Times New Roman", Font.PLAIN, 25);
-    private String username;
-    private String password;
+
 
     public static void main() {
-
 
         JFrame frame = new JFrame();
         JPanel panel = new JPanel();
@@ -55,14 +52,6 @@ public class Registration {
         passwordText.setBounds(240, 240, 165, 25);
         panel.add(passwordText);
 
-     //   repeatPsLabel = new JLabel("Repeat password");
-      //  repeatPsLabel.setBounds(100, 280, 100, 25);
-      //  panel.add(repeatPsLabel);
-
-    //    repeatPsText = new JPasswordField();
-    //    repeatPsText.setBounds(240, 280, 165, 25);
-    //    panel.add(repeatPsText);
-
         button = new JButton("Exit");
         button.setBounds(100, 320, 100, 25);
         panel.add(button);
@@ -74,8 +63,6 @@ public class Registration {
             }
 
         });
-
-
                 button2 = new JButton("Register");
                 button2.setBounds(240, 320, 100, 25);
                 panel.add(button2);
@@ -88,12 +75,10 @@ public class Registration {
                         String password = passwordText.getText();
 
                         try {
-                            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bulls_cows", "root", "Abdurawidovna.91");
-
-                            String query = "INSERT INTO users(username, password)" + "VALUES('" + userName + "', '" + password + "')";
+                            Connection connection = DriverManager.getConnection("jdbc:mysql://db4free.net:3306/game_bulls_cows", User.USERNAME.getValue(), User.PASSWORD.getValue());
+                            String query = "INSERT INTO CowsAndBulls(username, password)" + "VALUES('" + userName + "', '" + password + "')";
                             Statement sta = connection.createStatement();
                             int x = sta.executeUpdate(query);
-
 
                             JFrame frame2 = new JFrame();
                             JPanel panel2 = new JPanel();
@@ -111,7 +96,6 @@ public class Registration {
                             button3.setBounds(50, 200, 200, 25);
                             panel2.add(button3);
 
-
                             button3.addActionListener(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
@@ -120,6 +104,17 @@ public class Registration {
 
                                 }
                             });
+                            button4 = new JButton("Start new hard game");
+                            button4.setBounds(300, 200, 200, 25);
+                            button4.addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    HardGame.main();
+                                    frame2.dispose();
+
+                                }
+                            });
+                            panel2.add(button4);
 
                             button = new JButton("Exit");
                             button.setBounds(50, 250, 100, 25);
@@ -134,20 +129,8 @@ public class Registration {
 
 
                         } catch (Exception exception) {
-
-//                            JFrame frame3 = new JFrame();
-//                            JPanel panel3 = new JPanel();
-//                            frame3.setSize(500, 300);
-//                            frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//                            frame3.add(panel3);
-//
-//                            panel3.setLayout(null);
-//
-//                            failLabel = new JLabel("Username already exists ");
-//                            failLabel.setBounds(30, 30, 400, 25);
-//                            panel3.add(failLabel);
-//
-//                            panel3.setVisible(true);
+                            JOptionPane.showMessageDialog(null, "Username already exists", "Error", JOptionPane.ERROR_MESSAGE);
+                            main();
 
 
                         }
