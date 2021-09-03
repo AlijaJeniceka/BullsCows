@@ -146,12 +146,15 @@ public class HardGame {
             String userInput = textField.getText();
             int entered = -1;
 
-
-                entered = Integer.parseInt(userInput);
                 if(entered < 1000 || entered > 9999){
-                    textField.setText("");
-                    JOptionPane.showMessageDialog(null, "You must enter an integer from 1000 to 9999", "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
+                    try {
+                        entered = Integer.parseInt(userInput);
+                    } catch (Exception e) {
+                        textField.setText("");
+                        JOptionPane.showMessageDialog(null, "You must enter an integer from 1000 to 9999", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+
                 }
 
            Pair<Integer, Integer> bullsAndCows= bullsAndCows(userInput, m_computer_number);
